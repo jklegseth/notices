@@ -14,17 +14,29 @@ export default class TextTransformer extends Component {
         mode: PropTypes.oneOf(['lower', 'upper']),
         transformToLowerCase: PropTypes.func.isRequired,
         transformToUpperCase: PropTypes.func.isRequired,
-        transformedValue: PropTypes.string
+        hasError: PropTypes.bool.isRequired,
+        transformedValue: PropTypes.string,
+        input: PropTypes.string
     }
 
     handleChange = e => this.setState({ currentValue: e.target.value })
 
     handleSubmit = e => {
+        e.preventDefault()
+        // stop empty submits
+        if (!this.state.currentValue.trim().length) {
+            return
+        }
         const { transformToLowerCase, transformToUpperCase, mode } = this.props
         const { currentValue } = this.state
         const action = mode === 'upper' ? transformToUpperCase : transformToLowerCase
-        e.preventDefault()
         action(currentValue)
+    }
+
+    componentDidUpdate() {
+        if (this.state.currentValue && this.props.input === this.state.currentValue && !this.props.hasError) {
+            this.setState({ currentValue: '' })
+         }
     }
 
     render() {

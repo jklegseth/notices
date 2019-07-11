@@ -21,11 +21,11 @@ const transformText = (input, mode = LOWERCASE) => dispatch => {
     dispatch({ type: TRANSFORM_VALUE_LOAD })
     axios.post(endpoint, { input })
         .then(res => {
-            dispatch({ type: TRANSFORM_VALUE_SUCCESS, payload: res.data })
+            dispatch({ type: TRANSFORM_VALUE_SUCCESS, payload: res.data, input })
             dispatch(showToastSuccess({ message: 'The Dude abides!' }))
         })
         .catch(err => {
-            dispatch({ type: TRANSFORM_VALUE_ERROR, payload: err })
+            dispatch({ type: TRANSFORM_VALUE_ERROR, payload: err, input })
             dispatch(showToastError({ message: 'Sorry, there was an error. Please try again.' }))
         })
 }
@@ -36,17 +36,18 @@ export const transformToUpperCase = input => transformText(input, UPPERCASE)
 const initialState = {
     transformedValue: '',
     isLoading: false,
-    error: null
+    error: null,
+    input: ''
 }
 
-export default function textTransform(state = initialState, { type, payload }) {
+export default function textTransform(state = initialState, { type, payload , input}) {
     switch (type) {
         case TRANSFORM_VALUE_LOAD:
-            return { ...state, isLoading: true, transformedValue: '' }
+            return { ...state, isLoading: true, transformedValue: '', input }
         case TRANSFORM_VALUE_SUCCESS:
-            return { ...state, isLoading: false, transformedValue: payload.output }
+            return { ...state, isLoading: false, transformedValue: payload.output, error: null, input }
         case TRANSFORM_VALUE_ERROR:
-            return { ...state, isLoading: false, error: payload.message }
+            return { ...state, isLoading: false, error: payload.message, input }
         default: return state
     }
 }
