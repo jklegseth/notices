@@ -6,6 +6,7 @@ import './App.css';
 import Home from './pages/Home'
 import LowerCase from './pages/LowerCase'
 import UpperCase from './pages/UpperCase'
+import ToastContainer from './containers/ToastContainer';
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
               <Route path="/uppercase" component={UpperCase} />
             </Switch>
           </div>
+          <ToastContainer />
         </div>
       </Router>
     );
