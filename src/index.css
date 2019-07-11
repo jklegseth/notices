@@ -1,5 +1,28 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-size: 16px;
+  letter-spacing: 0em;
+  line-height: 1.6em;
+  font-family: Libre Franklin;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 19px;
+  letter-spacing: .06em;
+  line-height: 1.8em;
+  text-transform: none;
+  color: #000;
+}
+
+h2 {
+  font-size: 1.4rem;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #999;
 }
