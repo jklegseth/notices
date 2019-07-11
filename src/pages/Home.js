@@ -7,8 +7,8 @@ export default class Home extends Component {
         return (
             <div className="Home-container">
                 <h1>What would you like to do?</h1>
-                <p><Link to="/lowercase">I want to make my strings lowercase <ArrowForwardIcon className="icon icon--inline" /></Link></p>
-                <p><Link to="/uppercase">I want to make my strings UPPERCASE <ArrowForwardIcon className="icon icon--inline" /></Link></p>
+                <p><Link to="/lowercase" className="icon-animate">I want to make my strings lowercase <ArrowForwardIcon className="icon icon--inline" /></Link></p>
+                <p><Link to="/uppercase" className="icon-animate">I want to make my strings UPPERCASE <ArrowForwardIcon className="icon icon--inline" /></Link></p>
             </div>
         )
     }
