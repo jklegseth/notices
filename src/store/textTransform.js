@@ -1,4 +1,8 @@
 import axios from 'axios'
+import {
+    showToastSuccess,
+    showToastError
+} from './toast'
 
 const TRANSFORM_VALUE_LOAD = 'TRANSFORM_VALUE_LOAD'
 const TRANSFORM_VALUE_SUCCESS = 'TRANSFORM_VALUE_SUCCESS'
@@ -16,8 +20,14 @@ const transformText = (input, mode = LOWERCASE) => dispatch => {
 
     dispatch({ type: TRANSFORM_VALUE_LOAD })
     axios.post(endpoint, { input })
-        .then(res => dispatch({ type: TRANSFORM_VALUE_SUCCESS, payload: res.data }))
-        .catch(err => dispatch({ type: TRANSFORM_VALUE_ERROR, payload: err }))
+        .then(res => {
+            dispatch({ type: TRANSFORM_VALUE_SUCCESS, payload: res.data })
+            dispatch(showToastSuccess({ message: 'The Dude abides!' }))
+        })
+        .catch(err => {
+            dispatch({ type: TRANSFORM_VALUE_ERROR, payload: err })
+            dispatch(showToastError({ message: 'Sorry, there was an error. Please try again.' }))
+        })
 }
 
 export const transformToLowerCase = input => transformText(input)

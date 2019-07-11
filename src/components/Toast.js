@@ -11,10 +11,16 @@ import React from 'react'
             padding: '15px',
         }
 
+        // Is this an anti-pattern? Not sure how we conditionally render
+        // a component when using the container+component structure.
+        if (!this.props.toast.message) {
+            return null;
+        }
+
          return (
             <div className="Toast-container">
                 <div style={divStyle}>
-                    Some message...
+                    {this.props.toast.message}
                 </div>
             </div>
         )
