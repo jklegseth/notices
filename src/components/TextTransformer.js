@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import '../styles/Button.css'
 import '../styles/TextTransformer.css'
 
 export default class TextTransformer extends Component {
@@ -30,10 +33,24 @@ export default class TextTransformer extends Component {
         return (
             <div className="TextTransformer-container">
                 <form onSubmit={this.handleSubmit}>
-                    <input value={currentValue} type="text" placeholder="Enter text to transform" onChange={this.handleChange} />
-                    <button type="submit">Transform Text</button>
+                    <TextField
+                        label="Enter text to transform"
+                        value={currentValue}
+                        onChange={this.handleChange}
+                        margin="normal"
+                        fullWidth={true}
+                        type="text"
+                    />
+                    <Button type="submit" variant="contained" className="button button--primary">
+                        Transform Text
+                    </Button>
                 </form>
-                <p>Transformed Text: {transformedValue}</p>
+                { transformedValue && (
+                    <p>
+                        <span className="text-muted">Transformed Text: </span>
+                        <span className="text-emphasized">{transformedValue}</span>
+                    </p>
+                )}
             </div>
         )
     }
