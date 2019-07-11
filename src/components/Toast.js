@@ -5,11 +5,38 @@ import Button from '@material-ui/core/Button'
 import Snackbar from '@material-ui/core/Snackbar'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import ErrorIcon from '@material-ui/icons/Error';
+import InfoIcon from '@material-ui/icons/Info';
+import WarningIcon from '@material-ui/icons/Warning';
 import '../styles/Snackbar.css'
 
 const styles = theme => ({
     close: {
-      padding: theme.spacing.unit / 2,
+        padding: theme.spacing.unit / 2
+    },
+    success: {
+        backgroundColor: '#43a047'
+    },
+    error: {
+        backgroundColor: '#d32f2f'
+    },
+    info: {
+        backgroundColor: '#1976d2n'
+    },
+    warning: {
+        backgroundColor: '#ffa000'
+    },
+    icon: {
+        fontSize: 20
+    },
+    iconVariant: {
+        opacity: 0.9,
+        marginRight: theme.spacing.unit / 2
+    },
+    message: {
+        display: 'flex',
+        alignItems: 'center'
     },
 });
 
@@ -48,6 +75,24 @@ export class Toast extends React.Component {
             return null;
         }
 
+        // material-ui has another way to do this, I opted to do it manually for now
+        // see https://material-ui.com/components/snackbars/
+        function setIcon(type) {
+            const iconClasses = `${classes.icon} ${classes.iconVariant}`;
+            switch (type) {
+                case 'success':
+                    return <CheckCircleIcon className={iconClasses} />
+                case 'error':
+                    return <ErrorIcon className={iconClasses} />
+                case 'info':
+                    return <InfoIcon className={iconClasses} />
+                case 'warning':
+                    return <WarningIcon className={iconClasses} />
+                default:
+                    return null;
+            }
+        }
+
         return (
             <div className="Toast-container">
                 <div>
@@ -63,7 +108,9 @@ export class Toast extends React.Component {
                         ContentProps={{
                             'aria-describedby': 'message-id',
                         }}
-                        message={<span id="message-id">{this.props.toast.message}</span>}
+                        message={<span id="message-id" className={classes.message}>
+                            {setIcon(this.props.toast.type)} {this.props.toast.message}
+                        </span>}
                         action={[
                             <Button key="undo" color="secondary" size="small" onClick={this.handleClose}>
                                 DISMISS
@@ -75,7 +122,7 @@ export class Toast extends React.Component {
                                 className={classes.close}
                                 onClick={this.handleClose}
                             >
-                                <CloseIcon />
+                                <CloseIcon className={classes.close} />
                             </IconButton>,
                         ]}
                     />
