@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import TextTransformer from '../components/TextTransformer'
 import { transformToLowerCase, transformToUpperCase } from '../store/textTransform'
 
-class TextTransformerContainer extends React.Component {
+class TextTransformerContainer extends Component {
     componentWillUnmount() {
         // need to clear this or it persists to the other transform page
         this.props.dispatch({ type: 'TRANSFORM_VALUE_RESET' })

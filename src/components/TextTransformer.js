@@ -37,7 +37,7 @@ export default class TextTransformer extends Component {
     componentDidUpdate() {
         if (this.state.currentValue && this.props.input === this.state.currentValue && !this.props.hasError) {
             this.setState({ currentValue: '' })
-         }
+        }
     }
 
     render() {

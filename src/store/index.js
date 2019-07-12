@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-
 import textTransform from './textTransform'
 import toast from './toast'
 
