@@ -27,9 +27,10 @@ export default class TextTransformer extends Component {
         if (!this.state.currentValue.trim().length) {
             return
         }
-        const { transformToLowerCase, transformToUpperCase, mode } = this.props
+        const { transformToLowerCase, transformToUpperCase, mode, dispatch } = this.props
         const { currentValue } = this.state
         const action = mode === 'upper' ? transformToUpperCase : transformToLowerCase
+        dispatch({ type: 'HIDE_TOAST' })
         action(currentValue)
     }
 
