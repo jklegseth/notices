@@ -7,6 +7,7 @@ import {
 const TRANSFORM_VALUE_LOAD = 'TRANSFORM_VALUE_LOAD'
 const TRANSFORM_VALUE_SUCCESS = 'TRANSFORM_VALUE_SUCCESS'
 const TRANSFORM_VALUE_ERROR = 'TRANSFORM_VALUE_ERROR'
+const TRANSFORM_VALUE_RESET = 'TRANSFORM_VALUE_RESET'
 
 const LOWERCASE_ENDPOINT = '/api/lowercase'
 const UPPERCASE_ENDPOINT = '/api/uppercase'
@@ -48,6 +49,8 @@ export default function textTransform(state = initialState, { type, payload , in
             return { ...state, isLoading: false, transformedValue: payload.output, error: null, input }
         case TRANSFORM_VALUE_ERROR:
             return { ...state, isLoading: false, error: payload.message, input }
+        case TRANSFORM_VALUE_RESET:
+            return initialState
         default: return state
     }
 }
